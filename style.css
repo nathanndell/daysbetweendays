@@ -45,7 +45,7 @@ body {
   gap: 40px;
   padding: 36px 24px;
 }
-.main { min-width: 0; text-align: center; }
+.main { grid-column: 2; min-width: 0; text-align: center; }
 .side-left { justify-self: end; }
 .side-right { justify-self: start; }
 
@@ -147,6 +147,7 @@ h1 {
 /* Responsive */
 @media (max-width: 1240px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
+  .main { grid-column: 1; }
   .side { display: none; }
 }
 @media (max-width: 600px) {

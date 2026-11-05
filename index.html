@@ -42,13 +42,65 @@
       <section class="result" aria-live="polite">
         <p class="error" id="error" hidden></p>
         <div class="big">
-          <span class="num" id="days">–</span>
-          <span class="unit" id="unit">days</span>
+          <span class="num" id="days"></span>
+          <span class="unit" id="unit"></span>
         </div>
         <div class="pills">
           <span class="pill" id="weeks" hidden></span>
           <span class="pill" id="ymd" hidden></span>
         </div>
+      </section>
+      <section class="info">
+        <h2>How to use the calculator</h2>
+        <p>Pick a start date in the "From" box and an end date in the "To" box, then press <strong>Count days</strong>. The result appears straight away, and it updates if you change either date. You'll see the total number of days, the same gap in weeks and days, and a breakdown in years, months and days.</p>
+
+        <h2>How the days are counted</h2>
+        <p>The calculator counts the days from the start date up to, but not including, the end date. So 1 January to 2 January is 1 day. This is the usual way to measure how long something lasts, how far away an event is, or how old something is.</p>
+        <p>If you want to count both the first and the last day, add 1 to the result. For example, 1 January to 31 December 2026 is 364 days, or 365 days counting both ends. If you enter the later date first, the calculator swaps them for you, so the answer is never negative.</p>
+
+        <h2>Worked examples</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Days</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>4 Nov 2026</td><td>25 Dec 2026</td><td>51</td></tr>
+              <tr><td>25 Dec 2026</td><td>1 Jan 2027</td><td>7</td></tr>
+              <tr><td>1 Jan 2026</td><td>1 Jan 2027</td><td>365</td></tr>
+              <tr><td>1 Jan 2028</td><td>1 Jan 2029</td><td>366 (leap year)</td></tr>
+              <tr><td>28 Feb 2028</td><td>1 Mar 2028</td><td>2 (29 Feb exists)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>What people use it for</h2>
+        <ul>
+          <li>Counting down to a holiday, wedding, birthday or exam.</li>
+          <li>Working out how long ago something happened, or how long a project, course or contract has run.</li>
+          <li>Checking a notice period, trial length or return window.</li>
+          <li>Tracking a streak, a pregnancy or a savings goal over time.</li>
+        </ul>
+
+        <h2>Frequently asked questions</h2>
+
+        <h3>Does it include the start and end date?</h3>
+        <p>It counts the start day but not the end day. Add 1 if you want both counted.</p>
+
+        <h3>How does it handle leap years?</h3>
+        <p>Automatically. A leap year has 366 days, with 29 February as the extra day, and the calculator uses the correct month lengths for every year.</p>
+
+        <h3>How are years, months and days worked out?</h3>
+        <p>It counts whole calendar months first, then the days left over. For example, 15 January to 20 March is 2 months and 5 days, which is 64 days in total, or 9 weeks and 1 day.</p>
+
+        <h3>Does it skip weekends or public holidays?</h3>
+        <p>No. It counts every calendar day. It doesn't work out working days, and it doesn't adjust for time zones or times of day.</p>
+
+        <h3>Are the dates I enter saved?</h3>
+        <p>No. The calculation runs in your browser, and the dates aren't sent to us or stored. See the <a href="/privacy.html">Privacy Policy</a> for details.</p>
+
+        <h3>Can I rely on it for legal or financial deadlines?</h3>
+        <p>It's a good general guide, but rules for deadlines vary, such as whether the first or last day counts. For anything legal, contractual or financial, check the exact rules that apply to you.</p>
       </section>
     </main>
 
@@ -88,8 +140,8 @@
       }
 
       function reset() {
-        daysEl.textContent = '–';
-        unitEl.textContent = 'days';
+        daysEl.textContent = '';
+        unitEl.textContent = '';
         weeksEl.hidden = true;
         ymdEl.hidden = true;
       }
@@ -98,10 +150,6 @@
         errorEl.hidden = true;
         if (!startEl.value || !endEl.value) {
           reset();
-          if (startEl.value || endEl.value) {
-            errorEl.textContent = 'Choose both dates to see the result.';
-            errorEl.hidden = false;
-          }
           return;
         }
 
